@@ -2,7 +2,7 @@ import Palette from "@/components/Palette";
 
 export default function Home() {
   return (
-    <main className="flex flex-col max-sm:flex-col-reverse items-center justify-between">
+    <main className="w-full h-screen flex flex-col items-center justify-between">
       <Palette />
     </main>
   );

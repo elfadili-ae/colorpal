@@ -12,7 +12,7 @@ const Palette = () => {
     const fifth = useRef<HTMLDivElement>(null)
 
     const [used, setUsed] = useState({});
-    const [currentColor, setCurrentColor] = useState(0);
+    const [currentColor, setCurrentColor] = useState(Math.floor(Math.random() * 1000));
 
     const palettes = [first, second, third, fourth, fifth];
 
@@ -28,11 +28,14 @@ const Palette = () => {
     const copyColor = (e: React.MouseEvent<HTMLDivElement>) => {
         const col = (e.target as HTMLDivElement).children[0].textContent as string;
         navigator.clipboard.writeText(col);
+
+        (e.target as HTMLDivElement).children[0].textContent = 'Copied!';
         (e.target as HTMLDivElement).classList.add('clicked');
         (e.target as HTMLDivElement).style.opacity = '0.5';
         setTimeout(() => {
             (e.target as HTMLDivElement).classList.remove('clicked');
-        (e.target as HTMLDivElement).style.opacity = '1.0';
+            (e.target as HTMLDivElement).style.opacity = '1.0';
+            (e.target as HTMLDivElement).children[0].textContent = col;
         }, 200);
     }
 
@@ -57,26 +60,26 @@ const Palette = () => {
     }, [currentColor]);
     
   return (
-    <div className='w-full h-screen flex flex-col'>
+    <div className='w-full h-screen flex max-sm:flex-col-reverse sm:flex-col'>
       <Controls
       next={nextColor}
       prev={prevColor}
       />
-        <div className='w-full h-full grid max-sm:grid-rows-5 sm:grid-cols-5'>
-            <div onClick={copyColor} ref={first} className='cursor-pointer w-full h-full flex justify-center items-end p-20'>
-                <p className='font-bold'>color</p>
+        <div className='w-full h-full flex max-sm:flex-col'>
+            <div onClick={copyColor} ref={first} className='cursor-pointer w-full h-full flex-1 flex justify-center items-end p-4 sm:p-10'>
+                <p className='w-full text-right sm:text-center font-bold'>color 1</p>
             </div>
-            <div onClick={copyColor} ref={second} className='cursor-pointer w-full h-full flex justify-center items-end p-20'>
-                <p className='font-bold'>color</p>
+            <div onClick={copyColor} ref={second} className='cursor-pointer w-full h-full flex-1 flex justify-center items-end p-4 sm:p-10'>
+                <p className='w-full text-right sm:text-center font-bold'>color 2</p>
             </div>
-            <div onClick={copyColor} ref={third} className='cursor-pointer w-full h-full flex justify-center items-end p-20'>
-                <p className='font-bold'>color</p>
+            <div onClick={copyColor} ref={third} className='cursor-pointer w-full h-full flex-1 flex justify-center items-end p-4 sm:p-10'>
+                <p className='w-full text-right sm:text-center font-bold'>color 3</p>
             </div>
-            <div onClick={copyColor} ref={fourth} className='cursor-pointer w-full h-full flex justify-center items-end p-20'>
-                <p className='font-bold'>color</p>
+            <div onClick={copyColor} ref={fourth} className='cursor-pointer w-full h-full flex-1 flex justify-center items-end p-4 sm:p-10'>
+                <p className='w-full text-right sm:text-center font-bold'>color 4</p>
             </div>
-            <div onClick={copyColor} ref={fifth} className='cursor-pointer w-full h-full flex justify-center items-end p-20'>
-                <p className='font-bold'>color</p>
+            <div onClick={copyColor} ref={fifth} className='cursor-pointer w-full h-full flex-1 flex justify-center items-end p-4 sm:p-10'>
+                <p className='w-full text-right sm:text-center font-bold'>color 5</p>
             </div>
         </div>
     </div>
