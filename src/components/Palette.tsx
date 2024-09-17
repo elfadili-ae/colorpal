@@ -57,6 +57,7 @@ const Palette = () => {
 
     useEffect(() => {
         setColors(palettColors[currentColor]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentColor]);
     
   return (
